@@ -1,3 +1,5 @@
+import './MenuBar.css';
+
 const MenuBar = () => {
   return (
     <ul className="menubar">
