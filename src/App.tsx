@@ -1,5 +1,5 @@
 import './App.css';
-import MenuBar from './MenuBar';
+import MenuBar from './component/MenuBar';
 
 function App() {
   return (
