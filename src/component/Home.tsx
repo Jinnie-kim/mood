@@ -1,4 +1,4 @@
-import useAuth from '../customHook/useAuth';
+import useAuth from '../hooks/useAuth';
 
 type HomeProp = {
   code: string;
