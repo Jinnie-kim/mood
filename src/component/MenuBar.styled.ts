@@ -10,7 +10,7 @@ export const MenuBars = styled.ul`
   left: 50%;
   transform: translateX(-50%);
   background-color: #ffffff;
-  opacity: 0.5;
+  opacity: 0.85;
   border-radius: 10px;
 `;
 
