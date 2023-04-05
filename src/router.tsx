@@ -1,9 +1,10 @@
 import { createBrowserRouter } from 'react-router-dom';
 import AuthLayout from './layout/AuthLayout';
 import Home from './pages/Home';
+import MyPage from './pages/Mypage';
+import PlayList from './pages/PlayList';
 import Login from './pages/Login';
-
-const code = new URLSearchParams(window.location.search).get('code');
+import Loading from './pages/Loading';
 
 interface RouterElement {
   id: number;
@@ -25,6 +26,24 @@ const routerData: RouterElement[] = [
     element: <Home />,
     withAuth: true,
   },
+  {
+    id: 2,
+    path: '/playlist',
+    element: <PlayList />,
+    withAuth: true,
+  },
+  {
+    id: 3,
+    path: '/mypage',
+    element: <MyPage />,
+    withAuth: true,
+  },
+  {
+    id: 4,
+    path: '/loading',
+    element: <Loading />,
+    withAuth: true,
+  },
 ];
 
 export const routers = createBrowserRouter(
@@ -32,7 +51,7 @@ export const routers = createBrowserRouter(
     if (router.withAuth) {
       return {
         path: router.path,
-        element: <AuthLayout code={code as string}>{router.element}</AuthLayout>,
+        element: <AuthLayout>{router.element}</AuthLayout>,
       };
     } else {
       return {
