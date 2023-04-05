@@ -1,4 +1,4 @@
-import { MenuBars, MenuBarButton } from './MenuBar.styled';
+import { MenuBars, MenuBarButton } from '../style/MenuBar.styled';
 
 const MenuBar = () => {
   return (
