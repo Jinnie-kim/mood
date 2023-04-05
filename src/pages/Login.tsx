@@ -1,4 +1,4 @@
-import { LoginButton } from './Login.styled';
+import { LoginButton } from '../style/Login.styled';
 const { VITE_AUTH_URL } = import.meta.env;
 
 export default function Login() {
