@@ -1,10 +1,5 @@
-import useAuth from '../hooks/useAuth';
-
-type HomeProp = {
-  code: string;
+const Home = () => {
+  return <p>hi</p>;
 };
 
-export default function Home({ code }: HomeProp) {
-  const accessToken = useAuth(code);
-  return <p>{code}</p>;
-}
+export default Home;
