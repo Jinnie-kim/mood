@@ -1,12 +1,16 @@
 import { RouterProvider } from 'react-router-dom';
 import { routers } from './router';
-import './App.css';
+import { Global } from '@emotion/react';
+import { AppStyle } from './style/Global.styled';
 
 function App() {
   return (
-    <section className="App">
-      <RouterProvider router={routers} />
-    </section>
+    <>
+      <Global styles={AppStyle} />
+      <section className="App">
+        <RouterProvider router={routers} />
+      </section>
+    </>
   );
 }
 
