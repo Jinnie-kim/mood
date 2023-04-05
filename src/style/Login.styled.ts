@@ -1,6 +1,10 @@
 import styled from '@emotion/styled';
 
 export const LoginButton = styled.a`
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%);
   width: fit-content;
   background-color: #fff;
   padding: 5px 10px;
