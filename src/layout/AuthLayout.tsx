@@ -1,13 +1,9 @@
-import useAuth from '../hooks/useAuth';
 import MenuBar from '../component/MenuBar';
-
 interface GeneralLayoutProps {
   children: React.ReactNode;
-  code: string;
 }
 
-const AuthLayout: React.FC<GeneralLayoutProps> = ({ children, code }) => {
-  const accessToken = useAuth(code);
+const AuthLayout: React.FC<GeneralLayoutProps> = ({ children }) => {
   return (
     <>
       {children}
