@@ -18,6 +18,7 @@ export const MainStyle = css`
   ul,
   li {
     list-style-type: none;
+    padding: 0;
   }
 `;
 
