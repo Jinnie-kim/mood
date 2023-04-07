@@ -23,3 +23,20 @@ interface PlaylistItemArray {
   type: string;
   uri: string;
 }
+
+interface PlaylistItem {
+  href: string;
+  limit: integer;
+  next: string;
+  offset: integer;
+  previous: string;
+  total: integer;
+  itmes: PlaylistItemInfo[];
+}
+
+interface PlaylistItemInfo {
+  added_at: string;
+  added_by: {};
+  is_local: boolean;
+  track: {};
+}

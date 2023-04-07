@@ -1,12 +1,13 @@
 import { useEffect, useState } from 'react';
 import { useToken, useGetToken } from '../store/store';
-import { getPlaylist } from '../api/playlist';
+import { getPlaylist, getPlaylistItem } from '../api/playlist';
 import { PlaylistLayout, Playlists, PlaylistItem } from '../style/Playlist.styled';
 
 const PlayList = () => {
   const token = useToken();
   const getToken = useGetToken();
   const [playlist, setPlaylist] = useState<Playlist>();
+  const [playlistItem, setPlaylistItem] = useState<PlaylistItem>();
 
   useEffect(() => {
     if (token) {
@@ -19,12 +20,23 @@ const PlayList = () => {
       getToken(localStorage.getItem('accessToken'));
     }
   }, [token]);
+
+  const getPlaylistId = (e: React.MouseEvent) => {
+    // console.log(e.target.id);
+    const playlist_id = e.target.id;
+    getPlaylistItem(token as string, '26OQ5aqXVhEABAY2fLbNeA');
+  };
+
   return (
     <PlaylistLayout>
       <h1>Playlist</h1>
       <Playlists>
         {playlist?.items.map((item) => {
-          return <PlaylistItem key={item.id}>{item.name}</PlaylistItem>;
+          return (
+            <PlaylistItem key={item.id} id={item.id} onClick={getPlaylistId}>
+              {item.name}
+            </PlaylistItem>
+          );
         })}
       </Playlists>
       <div>
