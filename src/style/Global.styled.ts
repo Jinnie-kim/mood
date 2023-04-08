@@ -16,6 +16,7 @@ export const MainStyle = css`
   }
 
   ul,
+  ol,
   li {
     list-style-type: none;
     padding: 0;
