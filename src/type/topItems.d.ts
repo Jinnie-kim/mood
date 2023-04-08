@@ -5,7 +5,7 @@ interface TopItems {
   offset: integer;
   previous: string;
   total: integer;
-  items: TopArtists | TopTracks[];
+  items: (TopArtists | TopTracks)[];
 }
 
 interface TopArtists {
