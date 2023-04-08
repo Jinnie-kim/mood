@@ -13,7 +13,5 @@ export const getTopTracks = async (token: string, term: string): Promise<TopItem
       Authorization: `Bearer ${token}`,
     },
   });
-  const data = await result.json();
-  console.log(data);
   return await result.json();
 };
