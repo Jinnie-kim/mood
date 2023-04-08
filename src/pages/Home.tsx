@@ -14,7 +14,9 @@ const Home = () => {
       getTopArtists(token, 'short_term').then((res) => {
         setTopArtists(res.items as TopArtists[]);
       });
-      getTopTracks(token, 'short_term');
+      getTopTracks(token, 'short_term').then((res) => {
+        setTopTracks(res.items as TopTracks[]);
+      });
       return;
     }
     if (localStorage.getItem('accessToken') !== null) {
@@ -49,16 +51,9 @@ const Home = () => {
             <TermButton>All Time</TermButton>
           </TermButtonBox>
           <TopItemLists>
-            <TopItemList>Hello - 소향</TopItemList>
-            <TopItemList>Until I found you - stephen sanchez, em beihold</TopItemList>
-            <TopItemList>Kiwi - Harry Styles</TopItemList>
-            <TopItemList>가을 - Darin</TopItemList>
-            <TopItemList>As it was - Harry styles</TopItemList>
-            <TopItemList>그대라는 시 - 태연</TopItemList>
-            <TopItemList>Music for a sushi restaurant - Harry styles</TopItemList>
-            <TopItemList>Late Night talking - Harry styles</TopItemList>
-            <TopItemList>Hard to love - blackpink</TopItemList>
-            <TopItemList>Love of my life - harry styles</TopItemList>
+            {topTracks?.map((topTrack) => {
+              return <TopItemList key={topTrack.id}>{topTrack.name}</TopItemList>;
+            })}
           </TopItemLists>
         </TopItemBox>
       </TopItemLayout>
