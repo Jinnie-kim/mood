@@ -56,4 +56,8 @@ export const TermButton = styled.button`
     background-color: hsla(343, 100%, 76%, 1);
     color: aliceblue;
   }
+  &:focus {
+    color: aliceblue;
+    background-color: hsla(343, 100%, 76%, 1);
+  }
 `;
