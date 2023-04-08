@@ -24,6 +24,42 @@ const Home = () => {
     }
   }, [token]);
 
+  const getShortTermTopArtists = () => {
+    getTopArtists(token as string, 'short_term').then((res) => {
+      setTopArtists(res.items as TopArtists[]);
+    });
+  };
+
+  const getMidTermTopArtists = () => {
+    getTopArtists(token as string, 'medium_term').then((res) => {
+      setTopArtists(res.items as TopArtists[]);
+    });
+  };
+
+  const getLongTermTopArtists = () => {
+    getTopArtists(token as string, 'long_term').then((res) => {
+      setTopArtists(res.items as TopArtists[]);
+    });
+  };
+
+  const getShortTermTopTracks = () => {
+    getTopTracks(token as string, 'short_term').then((res) => {
+      setTopTracks(res.items as TopTracks[]);
+    });
+  };
+
+  const getMidTermTopTracks = () => {
+    getTopTracks(token as string, 'medium_term').then((res) => {
+      setTopTracks(res.items as TopTracks[]);
+    });
+  };
+
+  const getLongTermTopTracks = () => {
+    getTopTracks(token as string, 'long_term').then((res) => {
+      setTopTracks(res.items as TopTracks[]);
+    });
+  };
+
   return (
     <ToppageLayout>
       <h1>My Listening History</h1>
@@ -32,9 +68,9 @@ const Home = () => {
         <TopItemBox>
           <h1>Top Artists</h1>
           <TermButtonBox>
-            <TermButton>Last 1 month</TermButton>
-            <TermButton>Last 6 month</TermButton>
-            <TermButton>All Time</TermButton>
+            <TermButton onClick={getShortTermTopArtists}>Last 1 month</TermButton>
+            <TermButton onClick={getMidTermTopArtists}>Last 6 month</TermButton>
+            <TermButton onClick={getLongTermTopArtists}>All Time</TermButton>
           </TermButtonBox>
           <TopItemLists>
             {topArtists?.map((topArtist) => {
@@ -46,9 +82,9 @@ const Home = () => {
         <TopItemBox>
           <h1>Top Tracks</h1>
           <TermButtonBox>
-            <TermButton>Last 1 month</TermButton>
-            <TermButton>Last 6 month</TermButton>
-            <TermButton>All Time</TermButton>
+            <TermButton onClick={getShortTermTopTracks}>Last 1 month</TermButton>
+            <TermButton onClick={getMidTermTopTracks}>Last 6 month</TermButton>
+            <TermButton onClick={getLongTermTopTracks}>All Time</TermButton>
           </TermButtonBox>
           <TopItemLists>
             {topTracks?.map((topTrack) => {
