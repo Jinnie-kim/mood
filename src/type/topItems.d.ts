@@ -44,7 +44,7 @@ interface TopTracks {
     album_group: string;
     artists: {}[];
   };
-  artists: {}[];
+  artists: { external_urls: { spotify: string }; href: string; id: string; name: string; type: string; uri: string }[];
   available_markets: string[];
   disc_number: integer;
   duration_ms: integer;
