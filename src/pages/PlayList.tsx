@@ -1,30 +1,35 @@
 import { useEffect, useState } from 'react';
-import { useToken, useGetToken } from '../store/store';
+import { useSelector, useDispatch } from 'react-redux';
+import { tokenAction } from '../store/token-slice';
 import { getPlaylist, getPlaylistItem } from '../api/playlist';
 import { PlaylistLayout, Playlists, PlaylistItem } from '../style/Playlist.styled';
 
+interface tokenType {
+  token: { accessToken: string };
+}
+
 const PlayList = () => {
-  const token = useToken();
-  const getToken = useGetToken();
   const [playlist, setPlaylist] = useState<Playlist>();
   const [playlistItem, setPlaylistItem] = useState<PlaylistItem>();
+  const dispatch = useDispatch();
+  const accessToken = useSelector((state: tokenType) => state.token.accessToken);
 
   useEffect(() => {
-    if (token) {
-      getPlaylist(token).then((res) => {
+    if (accessToken) {
+      getPlaylist(accessToken).then((res) => {
         setPlaylist(res);
       });
       return;
     }
     if (localStorage.getItem('accessToken') !== null) {
-      getToken(localStorage.getItem('accessToken'));
+      dispatch(tokenAction.getToken(localStorage.getItem('accessToken')));
     }
-  }, [token]);
+  }, [accessToken]);
 
   const getPlaylistId = (e: React.MouseEvent) => {
     // console.log(e.target.id);
-    const playlist_id = e.target.id;
-    getPlaylistItem(token as string, '26OQ5aqXVhEABAY2fLbNeA');
+    // const playlist_id = e.target.id;
+    // getPlaylistItem(accessToken as string, '26OQ5aqXVhEABAY2fLbNeA');
   };
 
   return (

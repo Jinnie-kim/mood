@@ -1,24 +1,29 @@
 import { useEffect, useState } from 'react';
-import { useToken, useGetToken } from '../store/store';
+import { useSelector, useDispatch } from 'react-redux';
+import { tokenAction } from '../store/token-slice';
 import { getUserProfile } from '../api/user';
 import { MypageLayout, InfoBox, UserImage } from '../style/Mypage.styled';
 
+interface tokenType {
+  token: { accessToken: string };
+}
+
 const MyPage = () => {
-  const token = useToken();
-  const getToken = useGetToken();
   const [userData, setUserData] = useState<UserProfile>();
+  const dispatch = useDispatch();
+  const accessToken = useSelector((state: tokenType) => state.token.accessToken);
 
   useEffect(() => {
-    if (token) {
-      getUserProfile(token).then((res) => {
+    if (accessToken) {
+      getUserProfile(accessToken).then((res) => {
         setUserData(res);
       });
       return;
     }
     if (localStorage.getItem('accessToken') !== null) {
-      getToken(localStorage.getItem('accessToken') as string);
+      dispatch(tokenAction.getToken(localStorage.getItem('accessToken')));
     }
-  }, [token]);
+  }, [accessToken]);
 
   return (
     <MypageLayout>

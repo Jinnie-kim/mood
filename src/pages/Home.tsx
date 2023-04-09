@@ -1,61 +1,66 @@
 import { useEffect, useState } from 'react';
-import { useToken, useGetToken } from '../store/store';
+import { useSelector, useDispatch } from 'react-redux';
+import { tokenAction } from '../store/token-slice';
 import { getTopArtists, getTopTracks } from '../api/topItems';
 import { ToppageLayout, TopItemLayout, TopItemBox, TopItemLists, TopItemList, TermButtonBox, TermButton } from '../style/Home.styled';
 
+interface tokenType {
+  token: { accessToken: string };
+}
+
 const Home = () => {
-  const token = useToken();
-  const getToken = useGetToken();
   const [topArtists, setTopArtists] = useState<TopArtists[]>();
   const [topTracks, setTopTracks] = useState<TopTracks[]>();
+  const dispatch = useDispatch();
+  const accessToken = useSelector((state: tokenType) => state.token.accessToken);
 
   useEffect(() => {
-    if (token) {
-      getTopArtists(token, 'short_term').then((res) => {
+    if (accessToken) {
+      getTopArtists(accessToken, 'short_term').then((res) => {
         setTopArtists(res.items as TopArtists[]);
       });
-      getTopTracks(token, 'short_term').then((res) => {
+      getTopTracks(accessToken, 'short_term').then((res) => {
         setTopTracks(res.items as TopTracks[]);
       });
       return;
     }
     if (localStorage.getItem('accessToken') !== null) {
-      getToken(localStorage.getItem('accessToken') as string);
+      dispatch(tokenAction.getToken(localStorage.getItem('accessToken')));
     }
-  }, [token]);
+  }, [accessToken]);
 
   const getShortTermTopArtists = () => {
-    getTopArtists(token as string, 'short_term').then((res) => {
+    getTopArtists(accessToken as string, 'short_term').then((res) => {
       setTopArtists(res.items as TopArtists[]);
     });
   };
 
   const getMidTermTopArtists = () => {
-    getTopArtists(token as string, 'medium_term').then((res) => {
+    getTopArtists(accessToken as string, 'medium_term').then((res) => {
       setTopArtists(res.items as TopArtists[]);
     });
   };
 
   const getLongTermTopArtists = () => {
-    getTopArtists(token as string, 'long_term').then((res) => {
+    getTopArtists(accessToken as string, 'long_term').then((res) => {
       setTopArtists(res.items as TopArtists[]);
     });
   };
 
   const getShortTermTopTracks = () => {
-    getTopTracks(token as string, 'short_term').then((res) => {
+    getTopTracks(accessToken as string, 'short_term').then((res) => {
       setTopTracks(res.items as TopTracks[]);
     });
   };
 
   const getMidTermTopTracks = () => {
-    getTopTracks(token as string, 'medium_term').then((res) => {
+    getTopTracks(accessToken as string, 'medium_term').then((res) => {
       setTopTracks(res.items as TopTracks[]);
     });
   };
 
   const getLongTermTopTracks = () => {
-    getTopTracks(token as string, 'long_term').then((res) => {
+    getTopTracks(accessToken as string, 'long_term').then((res) => {
       setTopTracks(res.items as TopTracks[]);
     });
   };
