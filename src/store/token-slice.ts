@@ -12,7 +12,6 @@ const tokenSlice = createSlice({
   reducers: {
     getToken(state, action) {
       const token = action.payload;
-      console.log(token);
       state.accessToken = token;
     },
   },
