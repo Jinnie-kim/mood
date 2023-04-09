@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { tokenAction } from '../store/token-slice';
+import { isValidToken } from '../api/user';
 import { getTopArtists, getTopTracks } from '../api/topItems';
 import { ToppageLayout, TopItemLayout, TopItemBox, TopItemLists, TopItemList, TermButtonBox, TermButton } from '../style/Home.styled';
 
@@ -12,9 +14,20 @@ const Home = () => {
   const [topArtists, setTopArtists] = useState<TopArtists[]>();
   const [topTracks, setTopTracks] = useState<TopTracks[]>();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const accessToken = useSelector((state: tokenType) => state.token.accessToken);
 
   useEffect(() => {
+    if (localStorage.getItem('accessToken') !== null) {
+      dispatch(tokenAction.getToken(localStorage.getItem('accessToken')));
+    }
+    isValidToken(accessToken).then((res) => {
+      if (!res) {
+        navigate('/');
+        localStorage.clear();
+      }
+      return;
+    });
     if (accessToken) {
       getTopArtists(accessToken, 'short_term').then((res) => {
         setTopArtists(res.items as TopArtists[]);
@@ -23,9 +36,6 @@ const Home = () => {
         setTopTracks(res.items as TopTracks[]);
       });
       return;
-    }
-    if (localStorage.getItem('accessToken') !== null) {
-      dispatch(tokenAction.getToken(localStorage.getItem('accessToken')));
     }
   }, [accessToken]);
 
