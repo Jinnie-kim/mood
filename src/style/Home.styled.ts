@@ -27,7 +27,7 @@ export const TopItemLists = styled.ol`
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  width: 100%;
+  width: 400px;
   height: 100%;
   text-align: left;
 `;
