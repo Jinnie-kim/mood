@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 export const MenuBars = styled.ul`
   display: flex;
   justify-content: space-around;
-  min-width: 1280px;
+  min-width: 85%;
   padding: 10px;
   position: fixed;
   bottom: 0;
